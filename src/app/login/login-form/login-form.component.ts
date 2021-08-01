@@ -15,25 +15,34 @@ export class LoginFormComponent {
   loginForm: FormGroup;
 
   constructor() {
-    const remember = localStorage.getItem('rememberUsername');
+    const remember = localStorage.getItem('remembered');
+    const {username, password} = this.checkRememberMe();
     this.loginForm = new FormGroup({
-      username: new FormControl(''),
-      password: new FormControl(''),
-      rememberUsername: new FormControl(
-        remember ? JSON.parse(remember) : false)
+      username: new FormControl(username),
+      password: new FormControl(password),
+      rememberMe: new FormControl(!!remember)
     });
 
     this.useCredentials = new EventEmitter();
   }
 
   onSubmit(): void {
-    const {rememberUsername} = this.loginForm.value;
-    if (rememberUsername) {
-      localStorage.setItem('rememberUsername', JSON.stringify(rememberUsername));
+    const {username, password, rememberMe} = this.loginForm.value;
+    if (rememberMe) {
+      localStorage.setItem('remembered', JSON.stringify({username, password}));
     } else {
-      localStorage.removeItem('rememberUsername');
+      localStorage.removeItem('remembered');
     }
     this.useCredentials.emit(this.loginForm.value);
+  }
+
+  checkRememberMe(): Credentials {
+    const remembered = localStorage.getItem('remembered');
+
+    if (remembered) {
+      return JSON.parse(remembered);
+    }
+    return {username: '', password: ''};
   }
 
 }
