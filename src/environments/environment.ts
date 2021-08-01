@@ -6,8 +6,7 @@ export const environment = {
   production: false,
   application: {
     api: 'http://localhost:8080',
-    landingPortal: 'http://localhost:3007',
-    secretKey: 'dev secret key'
+    landingPortal: 'http://localhost:3007'
   }
 };
 

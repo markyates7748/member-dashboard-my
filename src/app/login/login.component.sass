@@ -10,9 +10,11 @@
 
 .login-modal
   max-width: 300px
-  max-height: 550px
-  padding: 2rem 2.5rem
+  padding: 1rem 2.5rem
 
+@include media-breakpoint-up(sm)
+  .login-modal
+    max-height: none
 
 @include media-breakpoint-up(md)
 
