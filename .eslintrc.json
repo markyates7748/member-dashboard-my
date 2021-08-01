@@ -39,7 +39,6 @@
           "error",
           "single"
         ],
-        "no-empty-function": "warn",
         "semi": [
           "error",
           "always"
