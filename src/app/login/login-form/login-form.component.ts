@@ -15,15 +15,24 @@ export class LoginFormComponent {
   loginForm: FormGroup;
 
   constructor() {
+    const remember = localStorage.getItem('rememberUsername');
     this.loginForm = new FormGroup({
       username: new FormControl(''),
-      password: new FormControl('')
+      password: new FormControl(''),
+      rememberUsername: new FormControl(
+        remember ? JSON.parse(remember) : false)
     });
 
     this.useCredentials = new EventEmitter();
   }
 
   onSubmit(): void {
+    const {rememberUsername} = this.loginForm.value;
+    if (rememberUsername) {
+      localStorage.setItem('rememberUsername', JSON.stringify(rememberUsername));
+    } else {
+      localStorage.removeItem('rememberUsername');
+    }
     this.useCredentials.emit(this.loginForm.value);
   }
 
