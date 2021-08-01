@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Credentials} from '@core/model/credentials.model';
 
 @Component({
   selector: 'app-login-form',
@@ -7,6 +9,22 @@ import {Component} from '@angular/core';
 })
 export class LoginFormComponent {
 
-  constructor() { }
+  @Output()
+  useCredentials: EventEmitter<Credentials>;
+
+  loginForm: FormGroup;
+
+  constructor() {
+    this.loginForm = new FormGroup({
+      username: new FormControl(''),
+      password: new FormControl('')
+    });
+
+    this.useCredentials = new EventEmitter();
+  }
+
+  onSubmit(): void {
+    this.useCredentials.emit(this.loginForm.value);
+  }
 
 }

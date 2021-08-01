@@ -19,7 +19,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@dashboard/*": ["src/app/dashboard/*"],
+      "@login/*": ["src/app/login/*"],
+      "@registration/*": ["src/app/registration/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
