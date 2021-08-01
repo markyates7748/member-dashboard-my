@@ -4,12 +4,16 @@ import {DashboardComponent} from '@dashboard/dashboard.component';
 import {LoginComponent} from '@login/login.component';
 import {RegistrationComponent} from '@registration/registration.component';
 import {AppRoutingErrorHandler} from './app-routing.error-handler';
+import {AppRoutingTitles} from './app-routing.titles';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: DashboardComponent
+    component: DashboardComponent,
+    data: {
+      title: AppRoutingTitles.DASHBOARD
+    }
   },
   {
     path: 'dashboard',
@@ -17,11 +21,17 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    data: {
+      title: AppRoutingTitles.LOGIN
+    }
   },
   {
     path: 'register',
-    component: RegistrationComponent
+    component: RegistrationComponent,
+    data: {
+      title: AppRoutingTitles.REGISTRATION
+    }
   }
 ];
 

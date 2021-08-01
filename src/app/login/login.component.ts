@@ -8,8 +8,6 @@ import {Credentials} from '@core/model/credentials.model';
 })
 export class LoginComponent {
 
-  constructor() { }
-
   handleLogin(credentials: Credentials): void {
     console.table(credentials);
   }
