@@ -1,20 +1,17 @@
 <div class="d-flex flex-column align-items-center justify-content-center min-vh-100 bg-image">
   <div class="login-container">
-    <div class="animate__animated animate__zoomIn animate__fastest w-100 shadow rounded-3 py-4 px-5 bg-white">
-      <div class="text-center mb-5 pt-5">
+    <div class="animate__animated animate__zoomIn animate__fastest login-modal w-100 shadow rounded-3 bg-white">
+      <div class="text-center mb-5">
         <img src="assets/images/logo-light.svg"
              draggable="false"
              alt="Aline Financial" style="width: 85px"/>
       </div>
       <app-login-form (useCredentials)="handleLogin($event)"></app-login-form>
-      <div class="text-center mt-5 pb-5">
+      <div class="text-center mt-5">
         Need an account?
         <br/>
         <a class="link-primary" routerLink="/register">Sign Up</a>
       </div>
     </div>
   </div>
-</div>
-<div class="position-absolute bottom-0 fs-5 m-2 text-black-50">
-  &copy; Aline Financial
 </div>
