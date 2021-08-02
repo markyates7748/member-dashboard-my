@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ComponentFactory,
+  ComponentFactoryResolver, QueryList,
+  TemplateRef,
+  ViewChild, ViewChildren,
+  ViewContainerRef
+} from '@angular/core';
+import {faAngleRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-registration-form',
@@ -7,34 +16,30 @@ import {AfterViewInit, Component, TemplateRef, ViewChild, ViewContainerRef} from
 })
 export class RegistrationFormComponent implements AfterViewInit {
 
-  @ViewChild('getStarted', {read: TemplateRef})
-  getStarted!: TemplateRef<any>;
+  angleRight = faAngleRight;
 
-  @ViewChild('membershipCheck', {read: TemplateRef})
-  membershipCheck!: TemplateRef<any>;
-
-  @ViewChild('lookUp', {read: TemplateRef})
-  lookUp!: TemplateRef<any>;
+  @ViewChildren(TemplateRef)
+  templates?: QueryList<TemplateRef<any>>;
 
   @ViewChild('formContainer', {read: ViewContainerRef})
-  formContainer!: ViewContainerRef;
-
-  templates?: TemplateRef<any>[];
+  formContainer?: ViewContainerRef;
 
   currentTemplate = 0;
+
+  constructor() {
+  }
 
   ngAfterViewInit(): void {
     this.setCurrentTemplate();
   }
 
   setCurrentTemplate() {
-    this.templates = [
-      this.getStarted,
-      this.membershipCheck,
-      this.lookUp
-    ];
-    this.formContainer.clear();
-    this.formContainer.createEmbeddedView(this.templates[this.currentTemplate]);
+    if (this.templates && this.formContainer) {
+      const temp = this.templates.get(this.currentTemplate);
+      this.formContainer.clear();
+      const embeddedView = this.formContainer.createEmbeddedView(temp!);
+      embeddedView.detectChanges();
+    }
   }
 
   nextTemplate(): void {
