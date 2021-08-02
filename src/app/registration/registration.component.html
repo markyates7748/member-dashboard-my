@@ -1,20 +1,25 @@
 <div class="min-vw-100 min-vh-100">
   <div class="d-flex flex-row">
-    <div class="d-none d-md-block w-75 min-vh-100 position-relative">
+    <div class="leftPanel d-none d-lg-block min-vh-100 position-relative">
       <div class="bg-image min-vh-100 w-100 position-absolute top-0 start-0">
       </div>
-      <div class="d-flex justify-content-center align-items-center vh-100 w-100 position-absolute top-0 start-0">
-        <div class="logo-title">
-          <span class="fs-1 text-primary">Aline</span>
-          <img src="assets/images/logo.svg" class="logo" alt="$"/>
-          <span class="fs-1 text-light">Financial</span>
+      <div class="d-flex flex-column justify-content-center align-items-center vh-100 w-100 position-absolute top-0 start-0">
+        <div class="my-2 animate__animated animate__fadeIn">
+          <div class="logo-title d-flex flex-row justify-content-center mx-auto">
+            <div class="fs-1 text-primary animate__animated animate__flipInX">Aline</div>
+            <img src="assets/images/logo.svg" class="logo animate__animated animate__flipInY animate__delay-half-second" alt="$"/>
+            <div class="fs-1 text-light animate__animated animate__flipInX">Financial</div>
+          </div>
+          <div class="logo-subtitle text-center fs-5 text-light mt-3 animate__animated animate__delay-1s animate__fadeIn">
+            <div class="d-inline-block animate__animated animate__fadeIn animate__delay-1s me-2">Wherever you go.</div> <div class="d-inline-block animate__animated animate__fadeIn animate__delay-2s">Bring <span class="text-primary fw-bold">your bank</span> along.</div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="w-50">
+    <div class="rightPanel">
       <div class="container">
-        <div class="m-5">
-          Test
+        <div class="m-5 animate__animated animate__fadeIn animate__delay-4s">
+          <app-registration-form></app-registration-form>
         </div>
       </div>
     </div>

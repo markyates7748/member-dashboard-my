@@ -22,6 +22,7 @@
       "dom"
     ],
     "paths": {
+      "@app/*": ["src/app/*"],
       "@core/*": ["src/app/core/*"],
       "@dashboard/*": ["src/app/dashboard/*"],
       "@login/*": ["src/app/login/*"],

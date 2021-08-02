@@ -1,15 +1,55 @@
 @import "~src/styles"
 
 .bg-image
-  background-color: $dark
+  background-image: url("~src/assets/images/building_plane.jpg")
   background-size: cover
   background-position: center
+  filter: brightness(70%)
 
 
 .logo
   width: 3.5rem
   line-height: 100%
+  filter: drop-shadow(0 0 15px transparentize($black, 0.8))
 
 .logo-title
   display: flex
   flex-direction: row
+  text-shadow: 0 0 15px transparentize($black, 0.8)
+
+.logo-subtitle
+  text-shadow: 0 0 15px transparentize($black, 0.8)
+
+@include media-breakpoint-up(lg)
+  .leftPanel
+    width: 65%
+    animation: leftPanelInit 3s linear, leftPanelSlide 0.5s ease 3s
+
+  .rightPanel
+    width: 35%
+    animation: rightPanelInit 3s linear, rightPanelSlide 0.5s ease 3s
+
+@keyframes leftPanelInit
+  0%, 100%
+    width: 100%
+
+@keyframes rightPanelInit
+  0%, 100%
+    width: 0
+    transform: scaleX(0)
+
+@keyframes leftPanelSlide
+  0%
+    width: 100%
+
+  100%
+    width: 65%
+
+@keyframes rightPanelSlide
+  0%
+    width: 0
+    transform: scaleX(0)
+
+  100%
+    width: 35%
+    transform: scaleX(1)
