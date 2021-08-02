@@ -1,18 +1,42 @@
 <ng-template #getStarted>
-  <h1 class="display-3">Get <span class="text-primary">Started</span></h1>
-  <p class="fs-3">Welcome to Aline Financial.</p>
-
-
+    <div class="registration-content animate__animated animate__fadeSlideInLeft animate__fast">
+        <div class="container p-5">
+          <h1 class="display-3 my-3">Welcome.</h1>
+          <div class="w-75 pb-3">
+            <hr class="line-divider"/>
+          </div>
+          <div class="fs-2 mt-5 mb-2">
+            You're about to enter <br/> <span class="text-primary fw-bold">your dashboard.</span>
+          </div>
+          <div class="mt-3 text-muted fw-light">
+            Transfer. Deposit. Manage. <span class="text-primary fw-normal">Your bank</span> anywhere.
+          </div>
+          <div class="text-center" style="margin-top: 10rem">
+            <button class="btn btn-outline-primary btn-lg rounded-pill py-3 px-4 fs-4"
+                    (click)="nextTemplate()">
+              Get Started
+              <fa-icon icon="angle-right"></fa-icon>
+            </button>
+          </div>
+        </div>
+    </div>
 </ng-template>
 
 <ng-template #membershipCheck>
-  <h1 class="h1">Need a membership?</h1>
+  <div class="registration-content animate__animated animate__fadeSlideInLeft">
+    <div class="container p-5">
+      <h1 class="display-3 my-3">Before we start...</h1>
+      <div class="w-75 pb-3">
+        <hr class="line-divider"/>
+      </div>
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #lookUp>
   <h1 class="h1">Look Up</h1>
 </ng-template>
 
-<div #formContainer class="container">
+<ng-container #formContainer class="position-relative h-100">
 
-</div>
+</ng-container>

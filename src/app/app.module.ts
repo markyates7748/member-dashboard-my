@@ -5,7 +5,6 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {LoginModule} from '@login/login.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {AppIconsModule} from './app-icons.module';
 import {RegistrationModule} from '@registration/registration.module';
 
 @NgModule({
@@ -17,10 +16,9 @@ import {RegistrationModule} from '@registration/registration.module';
     AppRoutingModule,
     LoginModule,
     RegistrationModule,
-    FontAwesomeModule,
-    AppIconsModule
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

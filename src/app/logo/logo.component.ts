@@ -1,19 +1,23 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-logo',
   template: `
     <div class="d-flex flex-row justify-content-center font-noto-sans">
-      <div class="fs-1 text-primary animate__animated animate__flipInX">Aline</div>
+      <div class="fs-1 text-primary" [ngClass]="{'animate__animated animate__flipInX': animate}">Aline</div>
       <img src="../../assets/images/logo.svg"
-           class="logo animate__animated animate__flipInY animate__delay-half-second"
+           class="logo"
+           [ngClass]="{'animate__animated animate__flipInY animate__delay-half-second': animate}"
            draggable="false"
            alt="$"/>
-      <div class="fs-1 text-light animate__animated animate__flipInX">Financial</div>
+      <div class="fs-1 text-light" [ngClass]="{'animate__animated animate__flipInX': animate}">Financial</div>
     </div>
   `,
   styleUrls: [
     './logo.component.sass'
   ]
 })
-export class LogoComponent {}
+export class LogoComponent {
+  @Input()
+  animate = false;
+}

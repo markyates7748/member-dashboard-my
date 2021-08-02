@@ -1,9 +1,10 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {RegistrationComponent} from './registration.component';
 import {RegistrationFormComponent} from './registration-form/registration-form.component';
 import {AppRoutingModule} from '@app/app-routing.module';
 import {LogoModule} from '@app/logo/logo.module';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppIconsModule} from '@app/app-icons.module';
 
 
 @NgModule({
@@ -12,9 +13,10 @@ import {LogoModule} from '@app/logo/logo.module';
     RegistrationFormComponent
   ],
   imports: [
-    CommonModule,
+    BrowserModule,
     AppRoutingModule,
-    LogoModule
+    LogoModule,
+    AppIconsModule
   ]
 })
 export class RegistrationModule { }

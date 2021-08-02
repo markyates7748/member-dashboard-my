@@ -27,11 +27,15 @@ const routes: Routes = [
     }
   },
   {
-    path: 'register',
+    path: 'get-started',
     component: RegistrationComponent,
     data: {
-      title: AppRoutingTitles.REGISTRATION
+      title: AppRoutingTitles.GET_STARTED
     }
+  },
+  {
+    path: 'register',
+    redirectTo: 'get-started'
   }
 ];
 
