@@ -1,24 +1,24 @@
 <div class="min-vw-100 min-vh-100">
   <div class="d-flex flex-row">
-    <div class="leftPanel d-none d-lg-block min-vh-100 position-relative">
+    <div [ngClass]="{'leftPanelAnimation': !visited}" class="leftPanel user-select-none d-none d-lg-block min-vh-100 position-relative">
       <div class="bg-image min-vh-100 w-100 position-absolute top-0 start-0">
       </div>
       <div class="d-flex flex-column justify-content-center align-items-center vh-100 w-100 position-absolute top-0 start-0">
-        <div class="my-2 animate__animated animate__fadeIn">
-          <div class="logo-title d-flex flex-row justify-content-center mx-auto">
-            <div class="fs-1 text-primary animate__animated animate__flipInX">Aline</div>
-            <img src="assets/images/logo.svg" class="logo animate__animated animate__flipInY animate__delay-half-second" alt="$"/>
-            <div class="fs-1 text-light animate__animated animate__flipInX">Financial</div>
+        <div class="my-2 mx-auto animate__animated animate__fadeIn">
+          <div class="logo-title">
+            <app-logo></app-logo>
           </div>
           <div class="logo-subtitle text-center fs-5 text-light mt-3 animate__animated animate__delay-1s animate__fadeIn">
-            <div class="d-inline-block animate__animated animate__fadeIn animate__delay-1s me-2">Wherever you go.</div> <div class="d-inline-block animate__animated animate__fadeIn animate__delay-2s">Bring <span class="text-primary fw-bold">your bank</span> along.</div>
+            <div class="d-inline-block animate__animated animate__fadeIn animate__delay-1s me-2">Wherever you go.</div>
+            <div class="d-inline-block animate__animated animate__fadeIn animate__delay-2s">Bring <span class="text-primary fw-bold">your bank</span> along.</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="rightPanel">
+    <div class="rightPanel" [ngClass]="{'rightPanelAnimation': !visited}">
       <div class="container">
-        <div class="m-5 animate__animated animate__fadeIn animate__delay-4s">
+        <div class="m-5"
+             [ngClass]="{'animate__animated animate__fadeIn animate__delay-4s': !visited}">
           <app-registration-form></app-registration-form>
         </div>
       </div>
