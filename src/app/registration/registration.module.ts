@@ -5,6 +5,7 @@ import {AppRoutingModule} from '@app/app-routing.module';
 import {LogoModule} from '@app/logo/logo.module';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppIconsModule} from '@app/app-icons.module';
+import {NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {AppIconsModule} from '@app/app-icons.module';
     BrowserModule,
     AppRoutingModule,
     LogoModule,
-    AppIconsModule
+    AppIconsModule,
+    NgbTooltipModule
   ]
 })
 export class RegistrationModule { }

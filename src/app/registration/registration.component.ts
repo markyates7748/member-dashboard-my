@@ -9,8 +9,6 @@ export class RegistrationComponent implements OnInit, AfterViewInit {
 
   visited = false;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.visited = (localStorage.getItem('visited') === 'true');
   }

@@ -1,10 +1,12 @@
 import {NgModule} from '@angular/core';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {IconDefinition} from '@fortawesome/fontawesome-svg-core';
-import {faAngleRight} from '@fortawesome/free-solid-svg-icons';
+import {faAngleRight, faUserCheck, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 
 const icons: IconDefinition[] = [
-  faAngleRight
+  faAngleRight,
+  faUserCheck,
+  faUserPlus
 ];
 
 @NgModule({

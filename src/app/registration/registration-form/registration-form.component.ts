@@ -1,13 +1,14 @@
 import {
   AfterViewInit,
   Component,
-  ComponentFactory,
-  ComponentFactoryResolver, QueryList,
+  QueryList,
   TemplateRef,
-  ViewChild, ViewChildren,
+  ViewChild,
+  ViewChildren,
   ViewContainerRef
 } from '@angular/core';
 import {faAngleRight} from '@fortawesome/free-solid-svg-icons';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-registration-form',
@@ -26,7 +27,10 @@ export class RegistrationFormComponent implements AfterViewInit {
 
   currentTemplate = 0;
 
+  landingPortalSignup: string;
+
   constructor() {
+    this.landingPortalSignup = `${environment.application.landingPortal}/signup`;
   }
 
   ngAfterViewInit(): void {

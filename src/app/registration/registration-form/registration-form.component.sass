@@ -2,4 +2,26 @@
   display: flex
   flex-direction: column
   justify-content: center
-  height: 100vh
+  min-height: 100vh
+  padding: 2.5rem 0
+
+
+.btn-change-text
+  display: inline-block
+  position: relative
+  .btn-default-text
+    position: absolute
+    display: inline-block
+    clip-path: inset(0 0 0 0)
+    transition-delay: 0.5s
+    transition: clip-path 0.3s ease
+  .btn-hover-text
+    display: inline-block
+    clip-path: inset(0 100% 0 0)
+    transition-delay: 0.5s
+    transition: clip-path 0.3s ease
+  &:hover
+    .btn-default-text
+      clip-path: inset(0 0 0 100%)
+    .btn-hover-text
+      clip-path: inset(0 0 0 0)
