@@ -29,6 +29,7 @@
     "animate.css": "^4.1.1",
     "bootstrap": "^5.0.2",
     "font-awesome": "^4.7.0",
+    "ngx-mask": "^12.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

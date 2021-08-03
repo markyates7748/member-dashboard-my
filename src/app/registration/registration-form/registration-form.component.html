@@ -5,16 +5,14 @@
       <div class="w-75 pb-3">
         <hr class="line-divider"/>
       </div>
-      <div class="fs-2 mt-5 mb-2">
+      <div class="fs-2 mb-2">
         You're about to enter <br/> <span class="text-primary fw-bold">your dashboard.</span>
       </div>
       <div class="mt-3 text-muted fw-light fs-5">
-        Transfer. Deposit. Manage.
-        <div>
-          <span class="text-primary fw-normal">Your bank</span> anywhere.
-        </div>
+        Transfer. Deposit. Manage. <span class="text-primary fw-normal">Your bank</span> anywhere.
       </div>
-      <div class="text-center" style="margin-top: 4.5rem">
+      <app-animated-wallet [scale]="0.85"></app-animated-wallet>
+      <div class="text-center mt-3">
         <button class="btn btn-outline-primary btn-lg rounded-pill py-md-3 px-md-4 fs-4"
                 (click)="nextTemplate()">
           Get Started
@@ -33,7 +31,7 @@
         <hr class="line-divider"/>
       </div>
       <div class="fs-2 mt-5 mb-2">
-        Which best describes you?
+        Which best <span class="text-primary">describes you?</span>
         <p class="text-muted fs-5 fst-italic">You must be a member to use the dashboard.</p>
       </div>
       <div class="row row-cols-1 row-cols-lg-2 mt-5">
@@ -44,7 +42,7 @@
               I am not yet a member.
             </span>
               <span class="btn-hover-text">
-              Create an account <fa-icon icon="user-plus"></fa-icon>
+              Apply for an account. <fa-icon icon="user-plus"></fa-icon>
             </span>
             </button>
           </a>
@@ -66,7 +64,85 @@
 </ng-template>
 
 <ng-template>
-  <h1 class="h1">Look Up</h1>
+  <div class="registration-content animate__animated animate__fadeSlideInLeft">
+    <div class="container p-5">
+      <h1 class="display-4 my-3">Let's <span class="text-primary">Look You Up</span></h1>
+      <div class="w-100 pb-3">
+        <hr class="line-divider"/>
+      </div>
+      <div class="mt-2 mb-4 small text-muted fw-light">
+        Please fill out the form below. This will help us find your membership and all the accounts associated with it.
+      </div>
+      <form>
+        <div class="container">
+          <div class="row row-cols-1">
+            <div class="col my-2">
+              <div class="form-floating position-relative w-100">
+                <input type="text"
+                       id="lastName"
+                       class="form-control"
+                       placeholder="Last Name"/>
+                <label class="form-label"
+                       for="lastName">Last Name</label>
+                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Enter your last name.">
+                  <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row row-cols-1 row-cols-md-2">
+            <div class="col my-2">
+              <div class="form-floating position-relative w-100">
+                <input type="text"
+                       id="dateOfBirth"
+                       class="form-control"
+                       mask="00/00/0000"
+                       [showTemplate]="true"
+                       placeholder="Date of Birth"/>
+                <label class="form-label"
+                       for="dateOfBirth">Date of Birth</label>
+                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Enter your date of birth. (MM/DD/YYYY)">
+                  <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
+                </div>
+              </div>
+            </div>
+            <div class="col my-2">
+              <div class="d-flex flex-row justify-content-around align-items-center ">
+                <div class="form-floating position-relative w-100">
+                  <input type="text"
+                         id="socialSecurity"
+                         class="form-control"
+                         mask="•••-••-0000"
+                         [dropSpecialCharacters]="true"
+                         [showTemplate]="true"
+                         placeholder="Social Security"/>
+                  <label class="form-label"
+                         for="socialSecurity">Social Security</label>
+                  <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Enter the last 4 of your SSN.">
+                    <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row row-cols-2 mt-5">
+            <div class="col text-center my-2">
+              <button type="button" class="btn btn-lg btn-outline-secondary rounded-pill"
+                      (click)="prevTemplate()">
+                Back
+              </button>
+            </div>
+            <div class="col text-center my-2">
+              <button class="btn btn-lg btn-outline-primary rounded-pill">
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
 </ng-template>
 
 <ng-container #formContainer class="position-relative h-100">
