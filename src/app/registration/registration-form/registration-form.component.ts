@@ -1,23 +1,24 @@
 import {
   AfterViewInit,
   Component,
+  OnInit,
   QueryList,
   TemplateRef,
   ViewChild,
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
-import {faAngleRight} from '@fortawesome/free-solid-svg-icons';
-import {environment} from '../../../environments/environment';
+import {environment} from '@environments/environment';
+import {RegistrationService} from '@core/services/registration.service';
+import {FormControl, FormGroup} from '@angular/forms';
+import {MemberLookup} from '@core/models/member-lookup.model';
 
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.sass']
 })
-export class RegistrationFormComponent implements AfterViewInit {
-
-  angleRight = faAngleRight;
+export class RegistrationFormComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(TemplateRef)
   templates?: QueryList<TemplateRef<any>>;
@@ -29,8 +30,20 @@ export class RegistrationFormComponent implements AfterViewInit {
 
   landingPortalSignup: string;
 
-  constructor() {
+  lookUpForm!: FormGroup;
+
+  lookUpLoading = false;
+
+  constructor(private service: RegistrationService) {
     this.landingPortalSignup = `${environment.application.landingPortal}/signup`;
+  }
+
+  ngOnInit(): void {
+    this.lookUpForm = new FormGroup({
+      lastName: new FormControl(''),
+      dateOfBirth: new FormControl(''),
+      socialSecurity: new FormControl('')
+    });
   }
 
   ngAfterViewInit(): void {
@@ -58,6 +71,17 @@ export class RegistrationFormComponent implements AfterViewInit {
       this.currentTemplate--;
       this.setCurrentTemplate();
     }
+  }
+
+  submitLookUp(): void {
+    this.lookUpLoading = true;
+    const lookUp: MemberLookup = this.lookUpForm.value;
+    this.service.lookUpMember(lookUp)
+      .subscribe(
+        found => {
+          this.lookUpLoading = false;
+          console.log(found);
+        });
   }
 
 }

@@ -7,6 +7,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppIconsModule} from '@app/app-icons.module';
 import {NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppMaskModule} from '@app/app-mask.module';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CoreModule} from '@core/core.module';
+import {GlobalModalModule} from '@app/global-modal/global-modal.module';
 
 
 @NgModule({
@@ -15,12 +18,17 @@ import {AppMaskModule} from '@app/app-mask.module';
     RegistrationFormComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    LogoModule,
-    AppIconsModule,
-    NgbTooltipModule,
-    AppMaskModule
+      BrowserModule,
+      AppRoutingModule,
+      LogoModule,
+      AppIconsModule,
+      NgbTooltipModule,
+      AppMaskModule,
+      ReactiveFormsModule,
+      CoreModule
+  ],
+  providers: [
+    GlobalModalModule
   ]
 })
 export class RegistrationModule { }

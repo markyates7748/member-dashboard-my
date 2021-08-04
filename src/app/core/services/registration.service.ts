@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {BaseService} from '@core/services/base.service';
-import {catchError, map} from 'rxjs/operators';
+import {BaseHttpService} from '@core/services/base-http.service';
+import {map} from 'rxjs/operators';
 import {MemberLookup} from '@core/models/member-lookup.model';
+import {CoreModule} from '@core/core.module';
 
 /**
  * Registration Service
  * <p>Used to supply registration components with API calls.</p>
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: CoreModule
 })
-export class RegistrationService extends BaseService {
+export class RegistrationService extends BaseHttpService {
 
   constructor(private http: HttpClient) {
     super();
@@ -27,7 +28,6 @@ export class RegistrationService extends BaseService {
    */
   lookUpMember(memberLookup: MemberLookup): Observable<boolean> {
     return this.http.post(this.getApi('/member-lookups'), memberLookup, {observe: 'response'})
-      .pipe(catchError(this.handleError))
       .pipe(map(res => res.status === 200));
   }
 

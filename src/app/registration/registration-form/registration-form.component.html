@@ -73,13 +73,14 @@
       <div class="mt-2 mb-4 small text-muted fw-light">
         Please fill out the form below. This will help us find your membership and all the accounts associated with it.
       </div>
-      <form>
+      <form [formGroup]="lookUpForm" (ngSubmit)="submitLookUp()">
         <div class="container">
           <div class="row row-cols-1">
             <div class="col my-2">
               <div class="form-floating position-relative w-100">
                 <input type="text"
                        id="lastName"
+                       formControlName="lastName"
                        class="form-control"
                        placeholder="Last Name"/>
                 <label class="form-label"
@@ -95,9 +96,11 @@
               <div class="form-floating position-relative w-100">
                 <input type="text"
                        id="dateOfBirth"
+                       formControlName="dateOfBirth"
                        class="form-control"
                        mask="00/00/0000"
                        [showTemplate]="true"
+                       [dropSpecialCharacters]="false"
                        placeholder="Date of Birth"/>
                 <label class="form-label"
                        for="dateOfBirth">Date of Birth</label>
@@ -111,10 +114,9 @@
                 <div class="form-floating position-relative w-100">
                   <input type="text"
                          id="socialSecurity"
+                         formControlName="socialSecurity"
                          class="form-control"
                          mask="•••-••-0000"
-                         [dropSpecialCharacters]="true"
-                         [showMaskTyped]="true"
                          placeholder="Social Security"/>
                   <label class="form-label"
                          for="socialSecurity">Social Security</label>

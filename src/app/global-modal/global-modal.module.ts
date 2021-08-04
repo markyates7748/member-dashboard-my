@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {GlobalModalDirective} from '@app/global-modal/global-modal.directive';
 import {GlobalModalComponent} from '@app/global-modal/global-modal.component';
-import {GlobalModalService} from '@app/global-modal/global-modal.service';
 import {GlobalModalState} from '@app/global-modal/global-modal.state';
 
 
@@ -19,7 +18,6 @@ import {GlobalModalState} from '@app/global-modal/global-modal.state';
     GlobalModalDirective
   ],
   providers: [
-    GlobalModalService,
     GlobalModalState
   ]
 })

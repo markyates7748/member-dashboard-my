@@ -1,10 +1,11 @@
-import {ErrorHandler, NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {NavigationError, Router, RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from '@dashboard/dashboard.component';
 import {LoginComponent} from '@login/login.component';
 import {RegistrationComponent} from '@registration/registration.component';
-import {AppRoutingErrorHandler} from './app-routing.error-handler';
 import {AppRoutingTitles} from './app-routing.titles';
+import {filter} from 'rxjs/operators';
+import {NotFoundComponent} from '@app/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'register',
     redirectTo: 'get-started'
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
@@ -46,12 +51,15 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule
-  ],
-  providers: [
-    {
-      provide: ErrorHandler,
-      useClass: AppRoutingErrorHandler
-    }
   ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+  constructor(private router: Router) {
+    router.events.pipe(filter(e => e instanceof NavigationError))
+      .subscribe((e) => {
+        if (e instanceof NavigationError) {
+          console.error(`Route not found: '${e.url}'`);
+        }
+      });
+  }
+}

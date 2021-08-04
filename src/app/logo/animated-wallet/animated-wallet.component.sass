@@ -6,7 +6,7 @@
   .coin
     display: block
     width: 65px
-    animation: coin-down 2.5s ease-out
+    animation: coin-down 2.5s ease
     animation-iteration-count: infinite
     z-index: 1
     user-select: none
@@ -20,16 +20,20 @@
 
 @keyframes coin-down
   0%
-    transform: rotateY(0) translateY(0) scale(1)
+    opacity: 0
+    transform: rotateY(0) translateY(0) scale(0)
+
+  15%, 20%
+    opacity: 1
+    transform: rotateY(0) translateY(0) scale(0.8)
 
   35%, 43%
-    transform: rotateY(720deg)
+    opacity: 1
+    transform: rotateY(720deg) translateY(-10px) scale(1)
 
-  55%, 75%
-    transform: translateY(125px) scale(0.5)
-
-  100%
-    transform: translateY(0)
+  55%, 100%
+    opacity: 0
+    transform: translateY(125px) scale(0.3, 0.65)
 
 
 @keyframes wallet-pop

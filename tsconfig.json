@@ -27,6 +27,7 @@
       "@dashboard/*": ["src/app/dashboard/*"],
       "@login/*": ["src/app/login/*"],
       "@registration/*": ["src/app/registration/*"],
+      "@error-handler/*": ["src/app/error-handler/*"],
       "@environments/*": ["src/environments/*"]
     }
   },
