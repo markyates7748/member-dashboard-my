@@ -1,4 +1,4 @@
-import { GlobalModalDirective } from './global-modal.directive';
+import {GlobalModalDirective} from './global-modal.directive';
 
 describe('GlobalModalDirective', () => {
   it('should create an instance', () => {

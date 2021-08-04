@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GlobalModalService } from './global-modal.service';
+import {GlobalModalService} from './global-modal.service';
 
 describe('GlobalModalService', () => {
   let service: GlobalModalService;

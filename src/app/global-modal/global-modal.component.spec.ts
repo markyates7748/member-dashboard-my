@@ -8,7 +8,7 @@ describe('GlobalModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GlobalModalComponent ]
+      declarations: [GlobalModalComponent]
     })
     .compileComponents();
   });
