@@ -84,7 +84,7 @@
                        placeholder="Last Name"/>
                 <label class="form-label"
                        for="lastName">Last Name</label>
-                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Enter your last name.">
+                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Enter your last name.">
                   <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
                 </div>
               </div>
@@ -114,11 +114,11 @@
                          class="form-control"
                          mask="•••-••-0000"
                          [dropSpecialCharacters]="true"
-                         [showTemplate]="true"
+                         [showMaskTyped]="true"
                          placeholder="Social Security"/>
                   <label class="form-label"
                          for="socialSecurity">Social Security</label>
-                  <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Enter the last 4 of your SSN.">
+                  <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Enter the last 4 of your SSN.">
                     <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
                   </div>
                 </div>

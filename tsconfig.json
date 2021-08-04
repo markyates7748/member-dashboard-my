@@ -26,7 +26,8 @@
       "@core/*": ["src/app/core/*"],
       "@dashboard/*": ["src/app/dashboard/*"],
       "@login/*": ["src/app/login/*"],
-      "@registration/*": ["src/app/registration/*"]
+      "@registration/*": ["src/app/registration/*"],
+      "@environments/*": ["src/environments/*"]
     }
   },
   "angularCompilerOptions": {

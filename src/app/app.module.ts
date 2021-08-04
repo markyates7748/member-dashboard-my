@@ -6,6 +6,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {LoginModule} from '@login/login.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {RegistrationModule} from '@registration/registration.module';
+import {CoreModule} from '@core/core.module';
+import {GlobalModalModule} from '@app/global-modal/global-modal.module';
 
 @NgModule({
   declarations: [
@@ -13,10 +15,12 @@ import {RegistrationModule} from '@registration/registration.module';
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     AppRoutingModule,
     LoginModule,
     RegistrationModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    GlobalModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
