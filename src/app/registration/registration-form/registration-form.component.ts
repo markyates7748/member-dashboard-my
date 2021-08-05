@@ -75,13 +75,27 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
 
   submitLookUp(): void {
     this.lookUpLoading = true;
+    this.disableForm();
     const lookUp: MemberLookup = this.lookUpForm.value;
     this.service.lookUpMember(lookUp)
       .subscribe(
         found => {
           this.lookUpLoading = false;
+          this.enableForm();
           console.log(found);
+        },
+        () => {
+          this.enableForm();
+          this.lookUpLoading = false;
         });
+  }
+
+  disableForm(): void {
+    this.lookUpForm.disable();
+  }
+
+  enableForm(): void {
+    this.lookUpForm.enable();
   }
 
 }

@@ -70,10 +70,10 @@
       <div class="w-100 pb-3">
         <hr class="line-divider"/>
       </div>
-      <div class="mt-2 mb-4 small text-muted fw-light">
+      <div class="mt-2 mb-4 fs-5 text-muted fw-light">
         Please fill out the form below. This will help us find your membership and all the accounts associated with it.
       </div>
-      <form [formGroup]="lookUpForm" (ngSubmit)="submitLookUp()">
+      <form #formLookUp="ngForm" [formGroup]="lookUpForm" (ngSubmit)="submitLookUp()">
         <div class="container">
           <div class="row row-cols-1">
             <div class="col my-2">
@@ -104,7 +104,7 @@
                        placeholder="Date of Birth"/>
                 <label class="form-label"
                        for="dateOfBirth">Date of Birth</label>
-                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Enter your date of birth. (MM/DD/YYYY)">
+                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Enter your date of birth. (MM/DD/YYYY)" placement="start">
                   <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
                 </div>
               </div>
@@ -127,6 +127,9 @@
               </div>
             </div>
           </div>
+          <div class="my-2 text-muted small fst-italic w-75">
+            <fa-icon icon="shield-alt"></fa-icon> Your privacy is important to us. The information you enter in this form will not be shared and will only be sent to a secure server.
+          </div>
           <div class="row row-cols-2 mt-5">
             <div class="col text-center my-2">
               <button type="button" class="btn btn-lg btn-outline-secondary rounded-pill"
@@ -135,8 +138,11 @@
               </button>
             </div>
             <div class="col text-center my-2">
-              <button class="btn btn-lg btn-outline-primary rounded-pill">
-                Continue
+              <button class="btn btn-lg btn-outline-primary rounded-pill"
+                      [disabled]="lookUpLoading || formLookUp.invalid">
+                <span class="d-flex flex-row align-items-center">
+                  Continue <span *ngIf="lookUpLoading" class="ms-1 d-inline-block spinner-grow spinner-grow-sm"></span>
+                </span>
               </button>
             </div>
           </div>

@@ -13,7 +13,10 @@ export class GlobalModalService {
 
   public show(options: GlobalModalOptions): void {
     this.state.options = options;
-    this.state.modal = this.modalService.open(this.state.template);
+    this.state.modal = this.modalService.open(this.state.template, {
+      centered: true,
+      size: 'lg'
+    });
   }
 
 
