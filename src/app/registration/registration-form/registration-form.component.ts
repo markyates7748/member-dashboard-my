@@ -11,7 +11,7 @@ import {
 import {environment} from '@environments/environment';
 import {RegistrationService} from '@core/services/registration.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {MemberLookup} from '@core/models/member-lookup.model';
+import {ValidatorFunctions} from '@core/validators/validator-functions';
 
 @Component({
   selector: 'app-registration-form',
@@ -30,20 +30,34 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
 
   landingPortalSignup: string;
 
-  lookUpForm!: FormGroup;
-
-  lookUpLoading = false;
+  registrationForm!: FormGroup;
+  registrationLoading = false;
 
   constructor(private service: RegistrationService) {
     this.landingPortalSignup = `${environment.application.landingPortal}/signup`;
   }
 
   ngOnInit(): void {
-    this.lookUpForm = new FormGroup({
-      lastName: new FormControl(''),
-      dateOfBirth: new FormControl(''),
-      socialSecurity: new FormControl('')
-    });
+    const {
+      usernameValidator,
+      passwordValidator,
+      membershipIdValidator,
+      confirmPassword
+    } = ValidatorFunctions;
+    this.registrationForm = new FormGroup({
+      membershipId: new FormControl('', [
+        membershipIdValidator()
+      ]),
+      username: new FormControl('', [
+        usernameValidator()
+      ]),
+      password: new FormControl('', [
+        passwordValidator()
+      ]),
+      confirmPassword: new FormControl('')
+    }, [
+      confirmPassword()
+    ]);
   }
 
   ngAfterViewInit(): void {
@@ -73,29 +87,16 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
     }
   }
 
-  submitLookUp(): void {
-    this.lookUpLoading = true;
-    this.disableForm();
-    const lookUp: MemberLookup = this.lookUpForm.value;
-    this.service.lookUpMember(lookUp)
-      .subscribe(
-        found => {
-          this.lookUpLoading = false;
-          this.enableForm();
-          console.log(found);
-        },
-        () => {
-          this.enableForm();
-          this.lookUpLoading = false;
-        });
+  registerUser(): void {
+    console.log(this.registrationForm.value);
   }
 
   disableForm(): void {
-    this.lookUpForm.disable();
+    this.registrationForm.disable();
   }
 
   enableForm(): void {
-    this.lookUpForm.enable();
+    this.registrationForm.enable();
   }
 
 }

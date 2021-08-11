@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
 import {BaseHttpService} from '@core/services/base-http.service';
-import {map} from 'rxjs/operators';
-import {MemberLookup} from '@core/models/member-lookup.model';
 import {CoreModule} from '@core/core.module';
+import {UserRegistration} from '@core/models/user-registration.model';
+import {Observable} from 'rxjs';
+import {UserResponse} from '@core/models/user-response.model';
 
 /**
  * Registration Service
@@ -20,15 +20,13 @@ export class RegistrationService extends BaseHttpService {
   }
 
   /**
-   * Look up member returns a boolean that represents
-   * the existence of a member with the provided
-   * MemberLookup object.
-   * @param memberLookup Contains PII of the member to look up.
-   * @return Observable of a boolean.
+   * Registers a user when the UserResponse Observable is
+   * subscribed to.
+   * @param registration The registration model used
+   *        as a request body for the POST call.
    */
-  lookUpMember(memberLookup: MemberLookup): Observable<boolean> {
-    return this.http.post(this.getApi('/member-lookups'), memberLookup, {observe: 'response'})
-      .pipe(map(res => res.status === 200));
+  registerUser(registration: UserRegistration): Observable<UserResponse> {
+    return this.http.post<UserResponse>(this.getApi('/users/registration'), registration);
   }
 
 }

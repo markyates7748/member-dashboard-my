@@ -66,26 +66,41 @@
 <ng-template>
   <div class="registration-content animate__animated animate__fadeSlideInLeft">
     <div class="container p-5">
-      <h1 class="display-4 my-3">Let's <span class="text-primary">Look You Up</span></h1>
+      <h1 class="display-4 my-3"><span class="text-primary">Register</span> an account</h1>
       <div class="w-100 pb-3">
         <hr class="line-divider"/>
       </div>
       <div class="mt-2 mb-4 fs-5 text-muted fw-light">
-        Please fill out the form below. This will help us find your membership and all the accounts associated with it.
+        Start taking advantage of the <span class="fw-normal">Aline Financial Member Dashboard</span> and create an account! Your money and your bank belongs with you anywhere you go.
       </div>
-      <form #formLookUp="ngForm" [formGroup]="lookUpForm" (ngSubmit)="submitLookUp()">
+      <form #registerForm="ngForm" [formGroup]="registrationForm" (ngSubmit)="registerUser()">
         <div class="container">
           <div class="row row-cols-1">
             <div class="col my-2">
               <div class="form-floating position-relative w-100">
                 <input type="text"
-                       id="lastName"
-                       formControlName="lastName"
+                       id="membershipId"
+                       formControlName="membershipId"
+                       mask="00000000"
                        class="form-control"
-                       placeholder="Last Name"/>
+                       placeholder="Membership ID"/>
                 <label class="form-label"
-                       for="lastName">Last Name</label>
-                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Enter your last name.">
+                       for="membershipId">Membership ID</label>
+                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Enter your membership ID. This will help us connect you to all of your accounts.">
+                  <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
+                </div>
+              </div>
+            </div>
+            <div class="col my-2">
+              <div class="form-floating position-relative w-100">
+                <input type="text"
+                       id="username"
+                       formControlName="username"
+                       class="form-control"
+                       placeholder="Username"/>
+                <label class="form-label"
+                       for="username">Username</label>
+                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Must be at between 6-20 characters long and can only include letters, numbers, underscores, and periods.">
                   <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
                 </div>
               </div>
@@ -94,17 +109,14 @@
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col my-2">
               <div class="form-floating position-relative w-100">
-                <input type="text"
-                       id="dateOfBirth"
-                       formControlName="dateOfBirth"
+                <input type="password"
+                       id="password"
+                       formControlName="password"
                        class="form-control"
-                       mask="00/00/0000"
-                       [showTemplate]="true"
-                       [dropSpecialCharacters]="false"
-                       placeholder="Date of Birth"/>
+                       placeholder="Password"/>
                 <label class="form-label"
-                       for="dateOfBirth">Date of Birth</label>
-                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Enter your date of birth. (MM/DD/YYYY)" placement="start">
+                       for="password">Password</label>
+                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one symbol." placement="start">
                   <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
                 </div>
               </div>
@@ -112,23 +124,19 @@
             <div class="col my-2">
               <div class="d-flex flex-row justify-content-around align-items-center ">
                 <div class="form-floating position-relative w-100">
-                  <input type="text"
-                         id="socialSecurity"
-                         formControlName="socialSecurity"
+                  <input type="password"
+                         id="confirmPassword"
+                         formControlName="confirmPassword"
                          class="form-control"
-                         mask="•••-••-0000"
-                         placeholder="Social Security"/>
+                         placeholder="Confirm Password"/>
                   <label class="form-label"
-                         for="socialSecurity">Social Security</label>
-                  <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Enter the last 4 of your SSN.">
+                         for="confirmPassword">Confirm Password</label>
+                  <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Re-enter your password.">
                     <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="my-2 text-muted small fst-italic w-75">
-            <fa-icon icon="shield-alt"></fa-icon> Your privacy is important to us. The information you enter in this form will not be shared and will only be sent to a secure server.
           </div>
           <div class="row row-cols-2 mt-5">
             <div class="col text-center my-2">
@@ -139,9 +147,9 @@
             </div>
             <div class="col text-center my-2">
               <button class="btn btn-lg btn-outline-primary rounded-pill"
-                      [disabled]="lookUpLoading || formLookUp.invalid">
+                      [disabled]="registerForm.invalid || registrationLoading">
                 <span class="d-flex flex-row align-items-center">
-                  Continue <span *ngIf="lookUpLoading" class="ms-1 d-inline-block spinner-grow spinner-grow-sm"></span>
+                  Register <span *ngIf="registrationLoading" class="ms-1 d-inline-block spinner-grow spinner-grow-sm"></span>
                 </span>
               </button>
             </div>

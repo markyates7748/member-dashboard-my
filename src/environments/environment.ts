@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   application: {
-    api: 'http://localhost:8080',
+    api: 'http://localhost:8080/api',
     landingPortal: 'http://localhost:3007'
   }
 };
