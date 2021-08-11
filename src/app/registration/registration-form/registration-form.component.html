@@ -73,7 +73,7 @@
       <div class="mt-2 mb-4 fs-5 text-muted fw-light">
         Start taking advantage of the <span class="fw-normal">Aline Financial Member Dashboard</span> and create an account! Your money and your bank belongs with you anywhere you go.
       </div>
-      <form #registerForm="ngForm" [formGroup]="registrationForm" (ngSubmit)="registerUser()">
+      <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
         <div class="container">
           <div class="row row-cols-1">
             <div class="col my-2">
@@ -86,9 +86,20 @@
                        placeholder="Membership ID"/>
                 <label class="form-label"
                        for="membershipId">Membership ID</label>
-                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Enter your membership ID. This will help us connect you to all of your accounts.">
-                  <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
-                </div>
+                <ng-template #noMembershipIdErrors>
+                  <app-form-control-indicator
+                    icon="info-circle"
+                    message="Enter your membership ID. This will help us connect you to all of your accounts."
+                    iconClass="text-primary"
+                  ></app-form-control-indicator>
+                </ng-template>
+                <ng-container *ngIf="registrationForm.get('membershipId')?.errors && registrationForm.get('membershipId')?.touched else noMembershipIdErrors">
+                  <app-form-control-indicator
+                    icon="exclamation-circle"
+                    message="Membership ID must be 8 numeric characters in length."
+                    iconClass="text-danger animate__animated animate__headShake"
+                  ></app-form-control-indicator>
+                </ng-container>
               </div>
             </div>
             <div class="col my-2">
@@ -100,9 +111,20 @@
                        placeholder="Username"/>
                 <label class="form-label"
                        for="username">Username</label>
-                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Must be at between 6-20 characters long and can only include letters, numbers, underscores, and periods.">
-                  <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
-                </div>
+                <ng-template #noUsernameError>
+                  <app-form-control-indicator
+                    icon="info-circle"
+                    message="Enter your username."
+                    iconClass="text-primary"
+                  ></app-form-control-indicator>
+                </ng-template>
+                <ng-container *ngIf="registrationForm.get('username')?.errors && registrationForm.get('username')?.touched else noUsernameError">
+                  <app-form-control-indicator
+                    icon="exclamation-circle"
+                    message="Username must contain only letters, numbers, underscores, and periods."
+                    iconClass="text-danger animate__animated animate__headShake"
+                  ></app-form-control-indicator>
+                </ng-container>
               </div>
             </div>
           </div>
@@ -116,9 +138,18 @@
                        placeholder="Password"/>
                 <label class="form-label"
                        for="password">Password</label>
-                <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" ngbTooltip="Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one symbol." placement="start">
-                  <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
-                </div>
+                <ng-template #noPasswordError>
+                  <app-form-control-indicator
+                    icon="info-circle"
+                    message="Enter a password."
+                    iconClass="text-primary"></app-form-control-indicator>
+                </ng-template>
+                <ng-container *ngIf="registrationForm.get('password')?.errors && registrationForm.get('password')?.touched else noPasswordError">
+                  <app-form-control-indicator
+                    icon="exclamation-circle"
+                    message="Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one symbol."
+                    iconClass="text-danger animate__animated animate__headShake"></app-form-control-indicator>
+                </ng-container>
               </div>
             </div>
             <div class="col my-2">
@@ -131,9 +162,18 @@
                          placeholder="Confirm Password"/>
                   <label class="form-label"
                          for="confirmPassword">Confirm Password</label>
-                  <div class="position-absolute top-0 end-0 d-flex align-items-center h-100" placement="start" ngbTooltip="Re-enter your password.">
-                    <fa-icon icon="info-circle" class="text-primary d-inline-block m-3"></fa-icon>
-                  </div>
+                  <ng-template #noConfirmPasswordError>
+                    <app-form-control-indicator
+                      icon="info-circle"
+                      message="Re-enter your password."
+                      iconClass="text-primary"></app-form-control-indicator>
+                  </ng-template>
+                  <ng-container *ngIf="registrationForm.get('confirmPassword')?.errors && registrationForm.get('confirmPassword')?.touched else noConfirmPasswordError">
+                    <app-form-control-indicator
+                      icon="exclamation-circle"
+                      message="The password you entered does not match."
+                      iconClass="text-danger animate__animated animate__headShake"></app-form-control-indicator>
+                  </ng-container>
                 </div>
               </div>
             </div>
@@ -147,7 +187,7 @@
             </div>
             <div class="col text-center my-2">
               <button class="btn btn-lg btn-outline-primary rounded-pill"
-                      [disabled]="registerForm.invalid || registrationLoading">
+                      [disabled]="registrationForm.invalid || registrationLoading">
                 <span class="d-flex flex-row align-items-center">
                   Register <span *ngIf="registrationLoading" class="ms-1 d-inline-block spinner-grow spinner-grow-sm"></span>
                 </span>

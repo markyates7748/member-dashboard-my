@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import {environment} from '@environments/environment';
 import {RegistrationService} from '@core/services/registration.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, RequiredValidator, Validators} from '@angular/forms';
 import {ValidatorFunctions} from '@core/validators/validator-functions';
 
 @Component({
@@ -46,15 +46,20 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
     } = ValidatorFunctions;
     this.registrationForm = new FormGroup({
       membershipId: new FormControl('', [
+        Validators.required,
         membershipIdValidator()
       ]),
       username: new FormControl('', [
+        Validators.required,
         usernameValidator()
       ]),
       password: new FormControl('', [
+        Validators.required,
         passwordValidator()
       ]),
-      confirmPassword: new FormControl('')
+      confirmPassword: new FormControl('', [
+        Validators.required
+      ])
     }, [
       confirmPassword()
     ]);
