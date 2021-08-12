@@ -1,4 +1,5 @@
-<ng-template>
+<!--Welcome Page-->
+<ng-template #templateWelcome>
   <div class="registration-content animate__animated animate__fadeSlideInLeft animate__fast">
     <div class="container p-5">
       <h1 class="display-3 my-3">Welcome!</h1>
@@ -23,7 +24,8 @@
   </div>
 </ng-template>
 
-<ng-template>
+<!--Need to apply?-->
+<ng-template #templateBeforeWeStart>
   <div class="registration-content animate__animated animate__fadeSlideInLeft">
     <div class="container p-5">
       <h1 class="display-4 my-3">Before we start...</h1>
@@ -63,7 +65,8 @@
   </div>
 </ng-template>
 
-<ng-template>
+<!--Registration Form-->
+<ng-template #templateRegistrationForm>
   <div class="registration-content animate__animated animate__fadeSlideInLeft">
     <div class="container p-5">
       <h1 class="display-4 my-3"><span class="text-primary">Register</span> an account</h1>
@@ -78,7 +81,7 @@
       </div>
       <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
         <div class="container">
-          <div class="row row-cols-1">
+          <div class="row row-cols-1 row-cols-md-2">
             <div class="col my-2">
               <div class="form-floating position-relative w-100">
                 <input type="text"
@@ -96,6 +99,26 @@
                 </app-form-control-validation-indicator>
               </div>
             </div>
+            <div class="col my-2">
+              <div class="form-floating position-relative w-100">
+                <input type="text"
+                       id="lastFourOfSSN"
+                       formControlName="lastFourOfSSN"
+                       mask="0000"
+                       [dropSpecialCharacters]="true"
+                       class="form-control"
+                       placeholder="Last 4 of SSN"/>
+                <label class="form-label"
+                       for="lastFourOfSSN">Last 4 of SSN</label>
+                <app-form-control-validation-indicator
+                  defaultMessage="Enter the last four of your SSN."
+                  errorMessage="Enter the last four of your SSN."
+                  [validateControl]="registrationForm.get('lastFourOfSSN')">
+                </app-form-control-validation-indicator>
+              </div>
+            </div>
+          </div>
+          <div class="row row-cols-1">
             <div class="col my-2">
               <div class="form-floating position-relative w-100">
                 <input type="text"
@@ -146,6 +169,11 @@
               </div>
             </div>
           </div>
+          <div *ngIf="errorMessage" class="row row-cols-1 animate__animated animate__headShake">
+            <div class="col w-100 text-center text-danger my-2">
+              {{errorMessage}}
+            </div>
+          </div>
           <div class="row row-cols-2 mt-5">
             <div class="col text-center my-2 order-1">
               <button class="btn btn-lg btn-outline-primary rounded-pill"
@@ -165,10 +193,37 @@
           </div>
         </div>
       </form>
-
     </div>
   </div>
 </ng-template>
 
-<ng-container #formContainer class="position-relative h-100">
+<!--Registration Success-->
+<ng-template #templateRegistrationSuccess>
+  <div class="registration-content animate__animated animate__fadeSlideInLeft">
+
+    <div class="container p-5">
+      <h1 class="display-3 my-3"><span class="text-primary">Success!</span></h1>
+      <div class="w-100 pb-3">
+        <hr class="line-divider"/>
+      </div>
+      <p class="text-muted fst-italic fs-2 mt-2">
+        Just one last thing...
+      </p>
+      <div class="text-center">
+        <app-animated-wallet [scale]="0.75"></app-animated-wallet>
+        <p class="mb-5 fs-4">
+          We've sent an email to <span class="text-primary fw-normal text-decoration-underline">{{email}}</span> to verify your registration.
+        </p>
+        <p class="my-5 fs-4">
+          Once you've done that...
+        </p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary fs-3 rounded-pill py-2 px-4" routerLink="/login">Login</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-container #formContainer class="position-relative h-100" style="max-width: 100vw">
 </ng-container>

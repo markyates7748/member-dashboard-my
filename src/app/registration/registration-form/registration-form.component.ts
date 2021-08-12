@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import {environment} from '@environments/environment';
 import {RegistrationService} from '@core/services/registration.service';
-import {FormControl, FormGroup, RequiredValidator, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ValidatorFunctions} from '@core/validators/validator-functions';
 import {UserRegistration} from '@core/models/user-registration.model';
 
@@ -21,8 +21,19 @@ import {UserRegistration} from '@core/models/user-registration.model';
 })
 export class RegistrationFormComponent implements OnInit, AfterViewInit {
 
-  @ViewChildren(TemplateRef)
-  templates?: QueryList<TemplateRef<any>>;
+  @ViewChild('templateWelcome')
+  welcomePage?: TemplateRef<any>;
+
+  @ViewChild('templateBeforeWeStart')
+  beforeWeStart?: TemplateRef<any>;
+
+  @ViewChild('templateRegistrationForm')
+  regFormTemplate?: TemplateRef<any>;
+
+  @ViewChild('templateRegistrationSuccess')
+  regSuccessTemplate?: TemplateRef<any>;
+
+  templates?: TemplateRef<any>[];
 
   @ViewChild('formContainer', {read: ViewContainerRef})
   formContainer?: ViewContainerRef;
@@ -33,6 +44,10 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
 
   registrationForm!: FormGroup;
   registrationLoading = false;
+
+  errorMessage?: string;
+
+  email?: string;
 
   constructor(private service: RegistrationService) {
     this.landingPortalSignup = `${environment.application.landingPortal}/signup`;
@@ -49,6 +64,11 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
       membershipId: new FormControl('', [
         Validators.required,
         membershipIdValidator()
+      ]),
+      lastFourOfSSN: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(4)
       ]),
       username: new FormControl('', [
         Validators.required,
@@ -67,12 +87,14 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.templates = [this.welcomePage!, this.beforeWeStart!, this.regFormTemplate!, this.regSuccessTemplate!];
     this.setCurrentTemplate();
+    console.log(this.templates?.length);
   }
 
   setCurrentTemplate() {
     if (this.templates && this.formContainer) {
-      const temp = this.templates.get(this.currentTemplate);
+      const temp = this.templates[this.currentTemplate];
       this.formContainer.clear();
       const embeddedView = this.formContainer.createEmbeddedView(temp!);
       embeddedView.detectChanges();
@@ -95,23 +117,26 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
 
   registerUser(): void {
     this.registrationLoading = true;
-    const {username, password, membershipId} = this.registrationForm.value;
+    const {username, password, membershipId, lastFourOfSSN} = this.registrationForm.value;
     const registration: UserRegistration = new UserRegistration(
       username,
       password,
-      membershipId
+      membershipId,
+      lastFourOfSSN
     );
     this.disableForm();
     this.service.registerUser(registration)
       .subscribe(
         response => {
+          this.email = response.email;
           this.registrationLoading = false;
           this.enableForm();
-          console.log(response);
+          this.nextTemplate();
         },
         error => {
           this.registrationLoading = false;
           this.enableForm();
+          this.errorMessage = error;
           console.error(error);
         }
       );
