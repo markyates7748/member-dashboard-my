@@ -23,11 +23,11 @@ export const ValidatorFunctions = {
       return invalidMembershipId ? {membershipId: {value: control.value}} : null;
     };
   },
-  confirmPassword: (): ValidatorFn => {
+  confirmValues: (controlToCompare: AbstractControl): ValidatorFn => {
     return (control: AbstractControl): ValidationErrors | null => {
-      const password = control.get('password')?.value;
-      const confirmPassword = control.get('confirmPassword')?.value;
-      return password !== confirmPassword ? {confirmPassword: {value: control.value, password: password}} : null;
+      const toCompare = controlToCompare.value;
+      const notTheSame = control.value !== toCompare;
+      return notTheSame ? {confirmPassword: {value: control.value, comparingTo: toCompare}} : null;
     };
   }
 };

@@ -12,6 +12,7 @@ import {environment} from '@environments/environment';
 import {RegistrationService} from '@core/services/registration.service';
 import {FormControl, FormGroup, RequiredValidator, Validators} from '@angular/forms';
 import {ValidatorFunctions} from '@core/validators/validator-functions';
+import {UserRegistration} from '@core/models/user-registration.model';
 
 @Component({
   selector: 'app-registration-form',
@@ -42,7 +43,7 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
       usernameValidator,
       passwordValidator,
       membershipIdValidator,
-      confirmPassword
+      confirmValues
     } = ValidatorFunctions;
     this.registrationForm = new FormGroup({
       membershipId: new FormControl('', [
@@ -57,12 +58,12 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
         Validators.required,
         passwordValidator()
       ]),
-      confirmPassword: new FormControl('', [
-        Validators.required
-      ])
-    }, [
-      confirmPassword()
-    ]);
+    });
+
+    this.registrationForm.addControl('confirmPassword', new FormControl('', [
+      Validators.required,
+      confirmValues(this.registrationForm.get('password')!)
+    ]));
   }
 
   ngAfterViewInit(): void {
@@ -93,7 +94,27 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
   }
 
   registerUser(): void {
-    console.log(this.registrationForm.value);
+    this.registrationLoading = true;
+    const {username, password, membershipId} = this.registrationForm.value;
+    const registration: UserRegistration = new UserRegistration(
+      username,
+      password,
+      membershipId
+    );
+    this.disableForm();
+    this.service.registerUser(registration)
+      .subscribe(
+        response => {
+          this.registrationLoading = false;
+          this.enableForm();
+          console.log(response);
+        },
+        error => {
+          this.registrationLoading = false;
+          this.enableForm();
+          console.error(error);
+        }
+      );
   }
 
   disableForm(): void {

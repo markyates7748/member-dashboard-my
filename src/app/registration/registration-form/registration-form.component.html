@@ -157,6 +157,7 @@
             </div>
             <div class="col text-center my-2 order-0">
               <button type="button" class="btn btn-lg btn-outline-secondary rounded-pill"
+                      [disabled]="registrationLoading"
                       (click)="prevTemplate()">
                 Back
               </button>

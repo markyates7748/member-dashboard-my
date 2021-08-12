@@ -4,7 +4,8 @@
  */
 export class UserRegistration {
   constructor(private _username: string,
-              private _password: string) {
+              private _password: string,
+              private _membershipId: string) {
   }
 
   set username(username: string) {
@@ -24,6 +25,14 @@ export class UserRegistration {
   }
 
   get membershipId(): string {
+    return this._membershipId;
+  }
+
+  set membershipId(membershipId: string) {
+    this._membershipId = membershipId;
+  }
+
+  get role(): string {
     return 'member';
   }
 
