@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {BaseHttpService} from '@core/services/base-http.service';
 import {CoreModule} from '@core/core.module';
 import {UserRegistration} from '@core/models/user-registration.model';
@@ -25,8 +25,10 @@ export class RegistrationService extends BaseHttpService {
    * @param registration The registration model used
    *        as a request body for the POST call.
    */
-  registerUser(registration: UserRegistration): Observable<UserResponse> {
-    return this.http.post<UserResponse>(this.getApi('/users/registration'), registration);
+  registerUser(registration: UserRegistration): Observable<HttpResponse<UserResponse>> {
+    return this.http.post<UserResponse>(this.getApi('/users/registration'), registration, {
+      observe: 'response'
+    });
   }
 
 }

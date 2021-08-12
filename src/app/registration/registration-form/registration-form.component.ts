@@ -13,6 +13,7 @@ import {RegistrationService} from '@core/services/registration.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ValidatorFunctions} from '@core/validators/validator-functions';
 import {UserRegistration} from '@core/models/user-registration.model';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-registration-form',
@@ -128,16 +129,18 @@ export class RegistrationFormComponent implements OnInit, AfterViewInit {
     this.service.registerUser(registration)
       .subscribe(
         response => {
-          this.email = response.email;
+          this.email = response.body?.email;
           this.registrationLoading = false;
           this.enableForm();
           this.nextTemplate();
         },
         error => {
-          this.registrationLoading = false;
-          this.enableForm();
-          this.errorMessage = error;
-          console.error(error);
+          if (!(error instanceof ProgressEvent)) {
+            this.registrationLoading = false;
+            this.enableForm();
+            this.errorMessage = error;
+            console.error(error);
+          }
         }
       );
   }
