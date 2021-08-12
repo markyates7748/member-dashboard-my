@@ -70,8 +70,11 @@
       <div class="w-100 pb-3">
         <hr class="line-divider"/>
       </div>
-      <div class="mt-2 mb-4 fs-5 text-muted fw-light">
-        Start taking advantage of the <span class="fw-normal">Aline Financial Member Dashboard</span> and create an account! Your money and your bank belongs with you anywhere you go.
+      <div class="mt-2 mb-4 fs-6 text-muted fw-light">
+        Start taking advantage of the Aline Financial <span class="fw-normal">Member Dashboard</span> and create an account!
+        <div class="my-2 fs-6 fst-italic fw-normal small">
+          Your money and your bank belongs with you anywhere you go.
+        </div>
       </div>
       <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
         <div class="container">
@@ -102,20 +105,10 @@
                        placeholder="Username"/>
                 <label class="form-label"
                        for="username">Username</label>
-                <ng-template #noUsernameError>
-                  <app-form-control-indicator
-                    [icon]="registrationForm.get('username')?.touched ? 'check-circle' : 'info-circle'"
-                    message="Enter your username."
-                    [iconClass]="registrationForm.get('username')?.touched ? 'text-success' : 'text-primary'"
-                  ></app-form-control-indicator>
-                </ng-template>
-                <ng-container *ngIf="registrationForm.get('username')?.errors && registrationForm.get('username')?.touched else noUsernameError">
-                  <app-form-control-indicator
-                    icon="exclamation-circle"
-                    message="Username must contain only letters, numbers, underscores, and periods."
-                    iconClass="text-danger animate__animated animate__headShake"
-                  ></app-form-control-indicator>
-                </ng-container>
+                <app-form-control-validation-indicator
+                  defaultMessage="Enter your username."
+                  errorMessage="Username must be between 6 and 20 characters. It must only contain letters, numbers, underscores, and periods."
+                  [validateControl]="registrationForm.get('username')"></app-form-control-validation-indicator>
               </div>
             </div>
           </div>
@@ -129,18 +122,10 @@
                        placeholder="Password"/>
                 <label class="form-label"
                        for="password">Password</label>
-                <ng-template #noPasswordError>
-                  <app-form-control-indicator
-                    icon="info-circle"
-                    message="Enter a password."
-                    iconClass="text-primary"></app-form-control-indicator>
-                </ng-template>
-                <ng-container *ngIf="registrationForm.get('password')?.errors && registrationForm.get('password')?.touched else noPasswordError">
-                  <app-form-control-indicator
-                    icon="exclamation-circle"
-                    message="Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one symbol."
-                    iconClass="text-danger animate__animated animate__headShake"></app-form-control-indicator>
-                </ng-container>
+                <app-form-control-validation-indicator
+                  defaultMessage="Enter a password."
+                  errorMessage="Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one symbol."
+                  [validateControl]="registrationForm.get('password')"></app-form-control-validation-indicator>
               </div>
             </div>
             <div class="col my-2">
@@ -153,35 +138,27 @@
                          placeholder="Confirm Password"/>
                   <label class="form-label"
                          for="confirmPassword">Confirm Password</label>
-                  <ng-template #noConfirmPasswordError>
-                    <app-form-control-indicator
-                      icon="info-circle"
-                      message="Re-enter your password."
-                      iconClass="text-primary"></app-form-control-indicator>
-                  </ng-template>
-                  <ng-container *ngIf="registrationForm.get('confirmPassword')?.errors && registrationForm.get('confirmPassword')?.touched else noConfirmPasswordError">
-                    <app-form-control-indicator
-                      icon="exclamation-circle"
-                      message="The password you entered does not match."
-                      iconClass="text-danger animate__animated animate__headShake"></app-form-control-indicator>
-                  </ng-container>
+                  <app-form-control-validation-indicator
+                    defaultMessage="Re-enter your password."
+                    errorMessage="The passwords you entered does not match."
+                    [validateControl]="registrationForm.get('confirmPassword')"></app-form-control-validation-indicator>
                 </div>
               </div>
             </div>
           </div>
           <div class="row row-cols-2 mt-5">
-            <div class="col text-center my-2">
-              <button type="button" class="btn btn-lg btn-outline-secondary rounded-pill"
-                      (click)="prevTemplate()">
-                Back
-              </button>
-            </div>
-            <div class="col text-center my-2">
+            <div class="col text-center my-2 order-1">
               <button class="btn btn-lg btn-outline-primary rounded-pill"
                       [disabled]="registrationForm.invalid || registrationLoading">
                 <span class="d-flex flex-row align-items-center">
                   Register <span *ngIf="registrationLoading" class="ms-1 d-inline-block spinner-grow spinner-grow-sm"></span>
                 </span>
+              </button>
+            </div>
+            <div class="col text-center my-2 order-0">
+              <button type="button" class="btn btn-lg btn-outline-secondary rounded-pill"
+                      (click)="prevTemplate()">
+                Back
               </button>
             </div>
           </div>

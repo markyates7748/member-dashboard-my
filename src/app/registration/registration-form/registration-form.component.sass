@@ -10,19 +10,29 @@
 .btn-change-text
   display: inline-block
   position: relative
+  white-space: nowrap
+  overflow: hidden
   .btn-default-text
     position: absolute
     display: inline-block
-    clip-path: inset(0 0 0 0)
     transition-delay: 0.5s
-    transition: clip-path 0.3s ease
+    opacity: 1
+    transform: translateX(0)
+    clip-path: inset(0 0 0 0)
+    transition: transform 0.3s ease, clip-path 0.3s ease, opacity 0.3s ease
   .btn-hover-text
     display: inline-block
-    clip-path: inset(0 100% 0 0)
     transition-delay: 0.5s
-    transition: clip-path 0.3s ease
+    opacity: 0
+    transform: translateX(100%)
+    clip-path: inset(0 100% 0 0)
+    transition: transform 0.3s ease, clip-path 0.3s ease, opacity 0.3s ease
   &:hover
     .btn-default-text
+      transform: translateX(-100%)
       clip-path: inset(0 0 0 100%)
+      opacity: 0
     .btn-hover-text
+      transform: translateX(0)
       clip-path: inset(0 0 0 0)
+      opacity: 1

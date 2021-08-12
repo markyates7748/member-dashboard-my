@@ -6,7 +6,7 @@ import {AbstractControl} from '@angular/forms';
   template: `
     <app-form-control-indicator [icon]="!validateControl?.touched ? 'info-circle' : validateControl?.errors ? 'exclamation-circle' : 'check-circle'"
                                 [message]="validateControl?.valid ? defaultMessage : errorMessage"
-                                [iconClass]="!validateControl?.touched ? 'text-primary' : validateControl?.errors ? 'text-danger' : 'text-success'"></app-form-control-indicator>
+                                [iconClass]="!validateControl?.touched ? 'text-primary' : validateControl?.errors ? 'text-danger animate__animated animate__headShake animate__fast' : 'text-success animate__animated animate__pulse animate__faster'"></app-form-control-indicator>
   `
 })
 export class FormControlValidationIndicatorComponent {
@@ -16,6 +16,4 @@ export class FormControlValidationIndicatorComponent {
   errorMessage!: string;
   @Input()
   validateControl!: AbstractControl | null;
-
-
 }
