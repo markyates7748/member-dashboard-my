@@ -86,20 +86,11 @@
                        placeholder="Membership ID"/>
                 <label class="form-label"
                        for="membershipId">Membership ID</label>
-                <ng-template #noMembershipIdErrors>
-                  <app-form-control-indicator
-                    icon="info-circle"
-                    message="Enter your membership ID. This will help us connect you to all of your accounts."
-                    iconClass="text-primary"
-                  ></app-form-control-indicator>
-                </ng-template>
-                <ng-container *ngIf="registrationForm.get('membershipId')?.errors && registrationForm.get('membershipId')?.touched else noMembershipIdErrors">
-                  <app-form-control-indicator
-                    icon="exclamation-circle"
-                    message="Membership ID must be 8 numeric characters in length."
-                    iconClass="text-danger animate__animated animate__headShake"
-                  ></app-form-control-indicator>
-                </ng-container>
+                <app-form-control-validation-indicator
+                  defaultMessage="Enter your membership ID. This will help us find all of your accounts."
+                  errorMessage="Membership ID must be a 8 digits in length."
+                  [validateControl]="registrationForm.get('membershipId')">
+                </app-form-control-validation-indicator>
               </div>
             </div>
             <div class="col my-2">
@@ -113,9 +104,9 @@
                        for="username">Username</label>
                 <ng-template #noUsernameError>
                   <app-form-control-indicator
-                    icon="info-circle"
+                    [icon]="registrationForm.get('username')?.touched ? 'check-circle' : 'info-circle'"
                     message="Enter your username."
-                    iconClass="text-primary"
+                    [iconClass]="registrationForm.get('username')?.touched ? 'text-success' : 'text-primary'"
                   ></app-form-control-indicator>
                 </ng-template>
                 <ng-container *ngIf="registrationForm.get('username')?.errors && registrationForm.get('username')?.touched else noUsernameError">

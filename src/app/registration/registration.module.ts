@@ -11,13 +11,15 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CoreModule} from '@core/core.module';
 import {GlobalModalModule} from '@app/global-modal/global-modal.module';
 import {FormControlIndicatorComponent} from '@registration/registration-form/form-control-indicator.component';
+import {FormControlValidationIndicatorComponent} from '@registration/registration-form/form-control-validation-indicator.component';
 
 
 @NgModule({
   declarations: [
     RegistrationComponent,
     RegistrationFormComponent,
-    FormControlIndicatorComponent
+    FormControlIndicatorComponent,
+    FormControlValidationIndicatorComponent
   ],
   imports: [
       BrowserModule,
